@@ -51,6 +51,8 @@ jobs:
     steps:
       - name: Checkout
         uses: actions/checkout@v2
+      - name: install node module
+        run: npm ci
       - name: Build the website
         run: npm run build
       - name: Deploy Surge
