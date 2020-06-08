@@ -36,7 +36,7 @@ jobs:
         with:
           name: coverage
       - shell: bash
-          run: ls -R
+        run: ls -R
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
