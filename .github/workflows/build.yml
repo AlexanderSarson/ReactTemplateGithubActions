@@ -40,10 +40,6 @@ jobs:
         with:
           name: coverage
           path: coverage
-      - name: Directory
-        run: ls -R
-      - name: present dir
-        run: pwd
       - name: SonarCloud Scan
         uses: sonarsource/sonarcloud-github-action@master
         env:
