@@ -22,3 +22,25 @@ jobs:
         with:
           start: npm run start:ci
           wait-on: 'http://localhost:3000'
+      - name: Upload test results
+        uses: actions/upload-artifact@v1
+        with:
+          name: coverage
+          path: coverage/lcov.info
+  sonarcloud:
+    needs: cypress-run
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Download test results
+        uses: actions/download-artifact@v1
+        with:
+          name: coverage
+      - uses: actions/checkout@v2
+        with:
+          # Disabling shallow clone is recommended for improving relevancy of reporting
+          fetch-depth: 0
+      - name: SonarCloud Scan
+        uses: sonarsource/sonarcloud-github-action@master
+        env:
+          GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
+          SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
