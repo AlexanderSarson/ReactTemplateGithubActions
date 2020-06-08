@@ -35,8 +35,9 @@ jobs:
         uses: actions/download-artifact@v2
         with:
           name: coverage
-      - shell: bash
+      - name: Directory
         run: ls -R
+      - name: present dir
         run: pwd
       - uses: actions/checkout@v2
         with:
