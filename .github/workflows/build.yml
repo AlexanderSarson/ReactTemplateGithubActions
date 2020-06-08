@@ -26,7 +26,7 @@ jobs:
         uses: actions/upload-artifact@v2
         with:
           name: coverage
-          path: coverage/lcov.info
+          path: coverage/
   sonarcloud:
     needs: cypress-run
     runs-on: ubuntu-18.04
@@ -37,6 +37,7 @@ jobs:
           name: coverage
       - shell: bash
         run: ls -R
+        run: pwd
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
