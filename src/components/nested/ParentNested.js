@@ -11,7 +11,7 @@ export default function ParentNested() {
       <h1>ParentNested</h1>
       <NavLink to='childNested'>Nested route</NavLink>
       <br />
-      <button onClick={handleButton}>Click me</button>
+      <button onClick={handleButton}>Click me to se params </button>
       <Outlet />
     </React.Fragment>
   );
