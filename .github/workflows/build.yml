@@ -45,3 +45,17 @@ jobs:
         env:
           GITHUB_TOKEN: ${{ secrets.GITHUB_TOKEN }}
           SONAR_TOKEN: ${{ secrets.SONAR_TOKEN }}
+  deploy:
+    needs: cypress-run
+    runs-on: ubuntu-18.04
+    steps:
+      - name: Checkout
+        uses: actions/checkout@v2
+      - name: Build the website
+        run: npm run build
+      - name: Deploy Surge
+        uses: yg/deploy-surge@v1.0.0
+        with:
+          SURGE_TOKEN: ${{ secrets.SURGE_TOKEN }}
+          DOMAIN_NAME: ${{ secrets.DOMAIN_NAME }}
+          BUILD_DIRECTORY: ${{ secrets.BUILD_DIRECTORY }}
