@@ -23,7 +23,7 @@ jobs:
           start: npm run start:ci
           wait-on: 'http://localhost:3000'
       - name: Upload test results
-        uses: actions/upload-artifact@v1
+        uses: actions/upload-artifact@v2
         with:
           name: coverage
           path: coverage/
@@ -32,9 +32,10 @@ jobs:
     runs-on: ubuntu-18.04
     steps:
       - name: Download test results
-        uses: actions/download-artifact@v1
+        uses: actions/download-artifact@v2
         with:
           name: coverage
+          path: /home/runner/work/ReactTemplateGithubActions/coverage
       - uses: actions/checkout@v2
         with:
           # Disabling shallow clone is recommended for improving relevancy of reporting
