@@ -19,9 +19,13 @@ jobs:
           # and run all Cypress tests
       - name: Cypress run
         uses: cypress-io/github-action@v1
+        env:
+          TEST_USER: ${{ secrets.TEST_USER }}
+          TEST_PASSWORD: ${{ secrets.TEST_PASSWORD }}
         with:
           start: npm run start:ci
           wait-on: 'http://localhost:3000'
+          command: npm run cy:ci:test
       - name: Upload test results
         uses: actions/upload-artifact@v2
         with:
