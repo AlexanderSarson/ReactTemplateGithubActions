@@ -1,7 +1,8 @@
 import React, { useState, useContext } from 'react';
-import { Button, TextField } from '@material-ui/core';
+import { Form, Input, Button } from 'semantic-ui-react';
 import { useNavigate } from 'react-router-dom';
 import facade from '../api/apiFacade';
+import { getUserAndRoles } from '../utils/JwtTokenParser';
 import { AuthContext } from '../contexts/AuthContext';
 
 export default function LogIn({ toggleModalLogin }) {
@@ -26,7 +27,7 @@ export default function LogIn({ toggleModalLogin }) {
       .login(user, pass)
       .then((response) => {
         facade.setToken(response.token);
-        login({ username: response.username, roles: response.roles });
+        login(getUserAndRoles(response.token));
       })
       .catch(console.error);
     toggleModalLogin();
@@ -58,24 +59,28 @@ export default function LogIn({ toggleModalLogin }) {
 function LoggedOut({ performLogin, change }) {
   return (
     <div>
-      <h2>Login</h2>
-      <form onChange={change}>
-        <TextField
-          size='small'
-          id='username'
-          label='User Name'
-          variant='outlined'
-        />
-        <TextField
-          size='small'
-          id='password'
-          label='Password'
-          variant='outlined'
-        />
-        <Button variant='outlined' color='primary' onClick={performLogin}>
-          Login
-        </Button>
-      </form>
+      <h2>Welcome back. Sign in below!</h2>
+      <Form onSubmit={performLogin}>
+        <Form.Field>
+          <Input
+            id='username'
+            onChange={change}
+            labelPosition='left corner'
+            label='Username'
+            placeholder='Username'
+          />
+        </Form.Field>
+        <Form.Field>
+          <Input
+            id='password'
+            onChange={change}
+            labelPosition='left corner'
+            label='Password'
+            placeholder='Password'
+          />
+        </Form.Field>
+        <Button type='submit'>Sign in</Button>
+      </Form>
     </div>
   );
 }
@@ -84,7 +89,7 @@ function LoggedIn({ handleLogout }) {
   return (
     <div>
       <h2>Logout</h2>
-      <button onClick={handleLogout}>Logout</button>
+      <Button onClick={handleLogout}>Sign out</Button>
     </div>
   );
 }

@@ -1,18 +1,5 @@
 /* eslint-disable no-undef */
 /// <reference types="Cypress" />
-/*
-describe("My First Test", () => {
-  it("Visits the Kitchen Sink", () => {
-    cy.visit("https://example.cypress.io");
-    cy.contains("type").click();
-    cy.url().should("include", "/commands/actions");
-
-    cy.get(".action-email")
-      .type("fake@email.com")
-      .should("have.value", "fake@email.com");
-  });
-});
-*/
 describe('Advanced state management', () => {
   it('Visits content 3', () => {
     cy.visit('http://localhost:3000');
